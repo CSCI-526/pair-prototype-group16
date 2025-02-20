@@ -26,13 +26,13 @@ public class Metronome_Flash : MonoBehaviour
         {
             transform.position = Vector3.Lerp(startPosition, endPosition, timeElapsed / lerpDuration);
             timeElapsed += Time.deltaTime;
-            Debug.Log(timeElapsed);
+            //Debug.Log(timeElapsed);
             if (timeElapsed >= lerpDuration)
             {
-                Debug.Log("Test");
+                //Debug.Log("Test");
                 timeElapsed = 0.00f;
                 transform.position = startPosition;
-                Debug.Log(transform.position);
+                //Debug.Log(transform.position);
             }
         }
     }
