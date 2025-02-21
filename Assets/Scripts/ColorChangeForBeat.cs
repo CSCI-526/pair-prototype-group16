@@ -59,12 +59,12 @@ public class ColorChangeForBeat : MonoBehaviour
         {
             isCorrect = true;
         }
-        else if(timeElapsed >= 1.9f && timeElapsed <= 2.1f)
+        else if(timeElapsed >= 1.8f && timeElapsed <= 2.2f)
         {
             isCorrect = true;
             canSpawnCircle = true;
         }
-        else if (timeElapsed >= 2.9f && timeElapsed <= 3.1f)
+        else if (timeElapsed >= 2.8f && timeElapsed <= 3.2f)
         {
             isCorrect = true;
             canSpawnSquare = true;

@@ -7,6 +7,7 @@ public class Order
 {
     public int circles; // num of circles
     public int squares; // num of squares
+    
 
     public Order(int circles, int squares)
     {
@@ -28,14 +29,15 @@ public class OrderManager : MonoBehaviour
     public GameObject[] circles; // num of circles
     public GameObject[] squares; // num of squares
     public Button completeButton; // complete button
-                                  
-    public GameObject circlePrefab; 
-    public GameObject squarePrefab; 
-    private Order currentOrder; // current order
-    private int currentCircles = 0; // num of circles
-    private int currentSquares = 0; // num of squares
 
-    private void Start()
+    public GameObject circlePrefab;
+    public GameObject squarePrefab;
+    public Order currentOrder; // current order
+    public int currentCircles = 0; // num of circles
+    public int currentSquares = 0; // num of squares
+    public bool isCleared = false;
+
+    public void Start()
     {
         // initialize
         orders = new Order[]
@@ -66,7 +68,7 @@ public class OrderManager : MonoBehaviour
         }
     }
 
-    private void UpdateOrderDisplay()
+    public void UpdateOrderDisplay()
     {
         if (orderDisplay != null)
         {
@@ -78,34 +80,52 @@ public class OrderManager : MonoBehaviour
         }
     }
 
-    private void CountShapes()
+    public void CountShapes()
     {
         currentCircles = 0;
         currentSquares = 0;
 
-        
+
         GameObject[] activeCircles = GameObject.FindGameObjectsWithTag("Circle");
-        currentCircles = activeCircles.Length; 
+        currentCircles = activeCircles.Length;
 
-        
+
         GameObject[] activeSquares = GameObject.FindGameObjectsWithTag("Square");
-        currentSquares = activeSquares.Length; 
+        currentSquares = activeSquares.Length;
 
-        Debug.Log($"current circle number: {currentCircles}, current square number: {currentSquares}"); 
+        Debug.Log($"current circle number: {currentCircles}, current square number: {currentSquares}");
     }
 
-    private void CheckOrderCompletion()
+    public void CheckOrderCompletion()
     {
         CountShapes(); // Count shapes when checking completion
 
         if (currentCircles == currentOrder.circles && currentSquares == currentOrder.squares)
         {
             Debug.Log("Complete order！");
-
+            RemoveShapes(currentOrder.circles, currentOrder.squares);
+            isCleared = true;
         }
         else
         {
             Debug.Log("Not complete,plz try again!");
         }
     }
+    public void RemoveShapes(int circlesToRemove, int squaresToRemove)
+    {
+
+        GameObject[] activeCircles = GameObject.FindGameObjectsWithTag("Circle");
+        for (int i = 0; i < circlesToRemove && i < activeCircles.Length; i++)
+        {
+            Destroy(activeCircles[i]); //  delete obj
+        }
+
+        GameObject[] activeSquares = GameObject.FindGameObjectsWithTag("Square");
+        for (int i = 0; i < squaresToRemove && i < activeSquares.Length; i++)
+        {
+            Destroy(activeSquares[i]); // delete obj
+        }
+
+    }
+
 }
