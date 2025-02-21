@@ -1259,7 +1259,7 @@ GameObject:
   - component: {fileID: 1132190861}
   m_Layer: 5
   m_Name: ShootButton
-  m_TagString: Untagged
+  m_TagString: ShootButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1390,6 +1390,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dfb799c3a3bf4177abb6bc3b303c379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canSpawnCircle: 0
+  canSpawnSquare: 0
 --- !u!1 &1187673236
 GameObject:
   m_ObjectHideFlags: 0
@@ -1536,6 +1538,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   circlePrefab: {fileID: 2522276994223398527, guid: c749beeb1cbbf244391641719d70bb38, type: 3}
   squarePrefab: {fileID: 2904330048856195194, guid: 9fc16450c309e7b41bd15167185d0e98, type: 3}
+  color: {fileID: 0}
 --- !u!1 &1390952032
 GameObject:
   m_ObjectHideFlags: 0

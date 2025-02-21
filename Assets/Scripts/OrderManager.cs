@@ -28,9 +28,9 @@ public class OrderManager : MonoBehaviour
     public GameObject[] circles; // num of circles
     public GameObject[] squares; // num of squares
     public Button completeButton; // complete button
-                                  // 预制件
-    public GameObject circlePrefab; // 圆形预制件
-    public GameObject squarePrefab; // 方形预制件
+                                  
+    public GameObject circlePrefab; 
+    public GameObject squarePrefab; 
     private Order currentOrder; // current order
     private int currentCircles = 0; // num of circles
     private int currentSquares = 0; // num of squares
@@ -83,15 +83,15 @@ public class OrderManager : MonoBehaviour
         currentCircles = 0;
         currentSquares = 0;
 
-        // 计算场景中活动的圆形预制件数量
+        
         GameObject[] activeCircles = GameObject.FindGameObjectsWithTag("Circle");
-        currentCircles = activeCircles.Length; // 直接获取数量
+        currentCircles = activeCircles.Length; 
 
-        // 计算场景中活动的方形预制件数量
+        
         GameObject[] activeSquares = GameObject.FindGameObjectsWithTag("Square");
-        currentSquares = activeSquares.Length; // 直接获取数量
+        currentSquares = activeSquares.Length; 
 
-        Debug.Log($"当前圆形数量: {currentCircles}, 当前方形数量: {currentSquares}"); // 输出数量
+        Debug.Log($"current circle number: {currentCircles}, current square number: {currentSquares}"); 
     }
 
     private void CheckOrderCompletion()

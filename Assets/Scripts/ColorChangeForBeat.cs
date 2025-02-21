@@ -7,6 +7,8 @@ public class ColorChangeForBeat : MonoBehaviour
 {
     private SpriteRenderer circleRenderer;
     private bool isCorrect = false; // Flag to toggle color for now
+    public bool canSpawnCircle = false; 
+    public bool canSpawnSquare = false;
     float timeElapsed = 0.0f;
     //float globalWait = 0.0f;
     private bool isCircleBlack = true;
@@ -60,10 +62,12 @@ public class ColorChangeForBeat : MonoBehaviour
         else if(timeElapsed >= 1.9f && timeElapsed <= 2.1f)
         {
             isCorrect = true;
+            canSpawnCircle = true;
         }
         else if (timeElapsed >= 2.9f && timeElapsed <= 3.1f)
         {
             isCorrect = true;
+            canSpawnSquare = true;
         }
 
         if (circleRenderer != null)
