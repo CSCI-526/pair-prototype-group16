@@ -97,20 +97,40 @@ public class OrderManager : MonoBehaviour
     }
 
     public void CheckOrderCompletion()
-    {
-        CountShapes(); // Count shapes when checking completion
+{
+    CountShapes(); // Count shapes when checking completion
 
-        if (currentCircles == currentOrder.circles && currentSquares == currentOrder.squares)
+    if (currentCircles == currentOrder.circles && currentSquares == currentOrder.squares)
+    {
+        Debug.Log("Complete order！");
+        RemoveShapes(currentOrder.circles, currentOrder.squares);
+        HideCompletedOrderButton(currentOrder);
+        SelectNextOrder();
+        isCleared = true;
+
+        // Disable the button for the current order
+        DisableOrderButton();
+    }
+    else
+    {
+        Debug.Log("Not complete, please try again!");
+    }
+}
+
+public void DisableOrderButton()
+{
+    // Find the index of the current order
+    for (int i = 0; i < orders.Length; i++)
+    {
+        if (orders[i] == currentOrder)
         {
-            Debug.Log("Complete order！");
-            RemoveShapes(currentOrder.circles, currentOrder.squares);
-            isCleared = true;
-        }
-        else
-        {
-            Debug.Log("Not complete,plz try again!");
+            // Disable the button for the completed order
+            orderButtons[i].interactable = false;
+            break;
         }
     }
+}
+
     public void RemoveShapes(int circlesToRemove, int squaresToRemove)
     {
 
@@ -126,6 +146,37 @@ public class OrderManager : MonoBehaviour
             Destroy(activeSquares[i]); // delete obj
         }
 
+    }
+
+private void HideCompletedOrderButton(Order currentOrder)
+    {
+        for (int i = 0; i < orders.Length; i++)
+        {
+            if (orders[i].circles == currentOrder.circles && orders[i].squares == currentOrder.squares)
+            {
+                orderButtons[i].gameObject.SetActive(false); 
+
+
+                if (orderDisplay != null)
+                {
+                    orderDisplay.text = ""; 
+                }
+                break;
+            }
+        }
+    }
+    private void SelectNextOrder()
+    {
+        for (int i = 0; i < orders.Length; i++)
+        {
+
+            if (orderButtons[i].gameObject.activeSelf) 
+            {
+                SelectOrder(i); 
+                orderButtons[i].onClick.Invoke(); 
+                break; 
+            }
+        }
     }
 
 }
