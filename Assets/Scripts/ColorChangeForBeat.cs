@@ -5,11 +5,14 @@ using UnityEngine.UI;
 using System;
 public class ColorChangeForBeat : MonoBehaviour
 {
-    private SpriteRenderer circleRenderer;
+    private Image circleRenderer;
     private bool isCorrect = false; // Flag to toggle color for now
     public bool canSpawnCircle = false; 
     public bool canSpawnSquare = false;
+    
     float timeElapsed = 0.0f;
+    float timeLastSpawn = 0.5f;
+
     //float globalWait = 0.0f;
     private bool isCircleBlack = true;
 
@@ -19,12 +22,14 @@ public class ColorChangeForBeat : MonoBehaviour
 
         if (circleObject != null)
         {
-            circleRenderer = circleObject.GetComponent<SpriteRenderer>();
+            circleRenderer = circleObject.GetComponent<Image>();
         }
     }
     void Update()
     {
         timeElapsed += Time.deltaTime;
+        timeLastSpawn += Time.deltaTime;
+
         //Debug.Log(timeElapsed);
     if (timeElapsed >= 4.00f)
         {
@@ -51,6 +56,8 @@ public class ColorChangeForBeat : MonoBehaviour
 
     public void ChangeColor()
     {
+        
+
         // check how much time has passed
         //timeElapsed += Time.deltaTime;
         //Debug.Log(timeElapsed);
@@ -62,12 +69,21 @@ public class ColorChangeForBeat : MonoBehaviour
         else if(timeElapsed >= 1.8f && timeElapsed <= 2.2f)
         {
             isCorrect = true;
-            canSpawnCircle = true;
+            if (timeLastSpawn >= 0.5f)
+            {
+                canSpawnCircle = true;
+                timeLastSpawn = 0.0f;
+            }
+            
         }
         else if (timeElapsed >= 2.8f && timeElapsed <= 3.2f)
         {
             isCorrect = true;
-            canSpawnSquare = true;
+            if (timeLastSpawn >= 0.5f)
+            {
+                canSpawnSquare = true;
+                timeLastSpawn = 0.0f;
+            }
         }
 
         if (circleRenderer != null)
@@ -77,7 +93,6 @@ public class ColorChangeForBeat : MonoBehaviour
             {
                 circleRenderer.color = Color.green;
             }
-
         }
 
         isCorrect = false;

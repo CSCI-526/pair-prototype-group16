@@ -7,19 +7,16 @@ public class Metronome_Flash : MonoBehaviour
     float timeElapsed = 0.0f;
     float lerpDuration = 4.0f;
 
-    Vector3 startPosition = new Vector3(104.0f, 380f, 0.00f);
-    Vector3 endPosition = new Vector3(504.00f, 380f, 0.00f);
-
-    //float lerpedValue;
+    Vector3 startPosition;
+    Vector3 endPosition;
 
     // Start is called before the first frame update
     void Start()
     {
-        var metPos = GameObject.Find("Metronome");
-        Vector3 tempPos = metPos.transform.position;
-        //Debug.Log(tempPos);
-        //Vector3 startPosition = transform.position;
-        //Debug.Log(startPosition);
+        startPosition = GetComponent<RectTransform>().anchoredPosition;
+
+        endPosition = startPosition;
+        endPosition.x += 1000.0f;
     }
 
     // Update is called once per frame
@@ -27,14 +24,14 @@ public class Metronome_Flash : MonoBehaviour
     {
         if (timeElapsed <= lerpDuration)
         {
-            transform.position = Vector3.Lerp(startPosition, endPosition, timeElapsed / lerpDuration);
+            GetComponent<RectTransform>().anchoredPosition = Vector3.Lerp(startPosition, endPosition, timeElapsed / lerpDuration);
             timeElapsed += Time.deltaTime;
             //Debug.Log("Time Elapsed: " + timeElapsed);
             if (timeElapsed >= lerpDuration)
             {
                 //Debug.Log("Test");
                 timeElapsed = 0.00f;
-                transform.position = startPosition;
+                GetComponent<RectTransform>().anchoredPosition = startPosition;
                 //Debug.Log(transform.position);
             }
         }
